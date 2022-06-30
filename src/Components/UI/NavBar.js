@@ -5,8 +5,10 @@ import useToken from '../../CustomHooks/useToken'
 import { Dropdown, Menu } from 'antd'
 import { Link } from 'react-router-dom'
 import { BiLogOutCircle, BiUserCircle } from 'react-icons/bi'
+import { GiHamburgerMenu } from 'react-icons/gi'
 
-const NavBar = () => {
+const NavBar = (props) => {
+  const { clickBurger, burgerClicked } = props
   const { token } = useToken()
 
   const menu = (
@@ -39,9 +41,16 @@ const NavBar = () => {
     />
   );
 
+  const sideBarCollapse = () => {
+    clickBurger(!burgerClicked)
+  }
+
   return (
     <NavBarContainer>
-      <h3 className='navTitle'>Luniva Route Management System</h3>
+      <h3 className='navTitle'>
+        <GiHamburgerMenu onClick={sideBarCollapse} /> &nbsp;
+        Luniva Route Management System
+      </h3>
       <UserIcon className='dropMenuClass'>
         <FaUserCircle />
         <Dropdown

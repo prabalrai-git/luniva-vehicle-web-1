@@ -10,7 +10,8 @@ import { useTranslation } from 'react-i18next';
 import useCurrentLanguage from '../../CustomHooks/GetCurrentLanguage';
 import logoImg from '../../Assets/Images/luniva360reverse.png'
 
-const ProSide = () => {
+const ProSide = (props) => {
+    const { burgerClicked } = props
     const newNav = useNavData()
     const { i18n } = useTranslation();
     const { setLanguage } = useCurrentLanguage();
@@ -24,8 +25,8 @@ const ProSide = () => {
         <SideBarContainer>
             <ProSidebar
                 width={250}
-                breakPoint={'md'}
                 collapsedWidth={'0'}
+                collapsed={burgerClicked}
             >
                 <SidebarHeader>
                     <div className='text-center'>
