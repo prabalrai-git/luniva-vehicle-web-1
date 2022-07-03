@@ -8,7 +8,7 @@ import { BiLogOutCircle, BiUserCircle } from 'react-icons/bi'
 import { GiHamburgerMenu } from 'react-icons/gi'
 
 const NavBar = (props) => {
-  const { clickBurger, burgerClicked } = props
+  const { clickBurger, burgerClicked, checkIfMobile } = props
   const { token } = useToken()
 
   const menu = (
@@ -30,7 +30,7 @@ const NavBar = (props) => {
           label: (
             <Link to={'/login'} onClick={() => sessionStorage.clear()}>
               <LinkBtn>
-                <BiLogOutCircle size={18} /> Log-out
+                <BiLogOutCircle size={18} /> Logout
               </LinkBtn>
             </Link>
 
@@ -42,13 +42,18 @@ const NavBar = (props) => {
   );
 
   const sideBarCollapse = () => {
-    clickBurger(!burgerClicked)
+    !checkIfMobile && clickBurger(!burgerClicked)
   }
 
   return (
     <NavBarContainer>
       <h3 className='navTitle'>
-        <GiHamburgerMenu onClick={sideBarCollapse} /> &nbsp;
+        {
+          !checkIfMobile &&
+          <>
+            <GiHamburgerMenu className='curPoint' onClick={sideBarCollapse} /> &nbsp;
+          </>
+        }
         Luniva Route Management System
       </h3>
       <UserIcon className='dropMenuClass'>
@@ -77,6 +82,10 @@ const NavBarContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center; 
+
+  .curPoint {
+    cursor: pointer;
+  }
 `
 
 const UserIcon = styled.div`

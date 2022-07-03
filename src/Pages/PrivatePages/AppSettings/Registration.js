@@ -2,19 +2,20 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { Col, Row } from 'antd'
-import { registerNav } from '../../../Helpers/NavData'
+import { useNavData } from '../../../CustomHooks/navDataHook'
 
 const Registration = () => {
+  const newNav = useNavData()
   return (
-
     <ReportContainer>
     <h2>Registration</h2>
       <Row gutter={[16, 16]}>
         {
-          registerNav.map(e => (
+          newNav.registerNav.map(e => (
+            e.showTab &&
             <Col sm={24} md={8} xs={24} lg={6} key={e.pathname}>
               <Link className='customNavLink' to={`/admin/${e.pathname}`} pathname={e.pathname}>
-                <div className="cButton"><span>{e.name}</span></div>
+                <div className="cButton"><e.icon /><span>&nbsp;{e.name}</span></div>
               </Link>
             </Col>
           ))

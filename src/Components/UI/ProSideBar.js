@@ -27,6 +27,7 @@ const ProSide = (props) => {
                 width={250}
                 collapsedWidth={'0'}
                 collapsed={burgerClicked}
+                // className={`${checkIfMobile ? 'newSidebar' : ''}`}
             >
                 <SidebarHeader>
                     <div className='text-center'>

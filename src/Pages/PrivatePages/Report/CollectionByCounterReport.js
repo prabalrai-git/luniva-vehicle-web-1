@@ -8,6 +8,7 @@ import { getDatewiseCollectionByCounterDetailsApi } from "../../../Services/Repo
 import { dateFormat } from "../../../Helpers/TodayDate";
 import { AppDefaultSettings } from "../../../Config/AppDefaultSettings";
 import useSingleCompany from "../../../Helpers/SetDefaultCompany";
+import { ExcelExportBtn } from "../../../Components/Common/ExcelExportBtn";
 
 const CollectionByCounterReport = () => {
     const [dataHead, setDataHead] = useState([])
@@ -28,6 +29,9 @@ const CollectionByCounterReport = () => {
             })
             setDataHead(data)
             setDataSource(res)
+        } else {
+            setDataHead([])
+            setDataSource([])
         }
     }
 
@@ -53,6 +57,10 @@ const CollectionByCounterReport = () => {
                     returnFilterData={returnFilterData}
                 />
             </Card>
+            <ExcelExportBtn
+                dataSource={dataSource}
+                filename={'collection by counter report.csv'}
+            />
             <div className="tableReponsive">
                 <Table
                     columns={dataHead}

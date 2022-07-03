@@ -6,6 +6,7 @@ import {
 import Filter from "../../../Components/Common/Filter";
 import { getDatewiseCollectionDetailsApi } from "../../../Services/ReportService";
 import { dateFormat } from "../../../Helpers/TodayDate";
+import { ExcelExportBtn } from "../../../Components/Common/ExcelExportBtn";
 
 const DynamicReport = () => {
     const [dataHead, setDataHead] = useState([])
@@ -24,6 +25,9 @@ const DynamicReport = () => {
             })
             setDataHead(data)
             setDataSource(res)
+        } else {
+            setDataHead([])
+            setDataSource([])
         }
     }
 
@@ -45,6 +49,10 @@ const DynamicReport = () => {
                     returnFilterData={returnFilterData}
                 />
             </Card>
+            <ExcelExportBtn
+                dataSource={dataSource}
+                filename={'collection report.csv'}
+            />
             <div className="tableReponsive">
                 <Table
                     columns={dataHead}

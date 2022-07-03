@@ -1,28 +1,21 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import NavBar from '../Components/UI/NavBar'
+import { NewNavHead } from '../Components/UI/NewNavHead'
 import ProSide from '../Components/UI/ProSideBar'
+import useCheckMobileScreen from '../CustomHooks/useCheckMobileScreen'
 import MainRoute from '../Routes/MainRoute'
 
 const Index = (props) => {
   const [burgerClicked, setBurgerClicked] = useState(false)
-  const [width, setWidth] = useState(window.innerWidth);
+  const checkIfMobile = useCheckMobileScreen()
 
-  function handleWindowSizeChange() {
-    setWidth(window.innerWidth);
-  }
   useEffect(() => {
-    window.addEventListener('resize', handleWindowSizeChange);
-    
-    if(width <= 856){
-      if(burgerClicked === false)
+    if (checkIfMobile) {
+      if (burgerClicked === false)
         setBurgerClicked(true)
     }
-
-    return () => {
-      window.removeEventListener('resize', handleWindowSizeChange);
-    }
-  }, [width, burgerClicked]);
+  }, [burgerClicked, checkIfMobile]);
 
   const clickBurger = (res) => {
     setBurgerClicked(res)
@@ -30,9 +23,15 @@ const Index = (props) => {
 
   return (
     <LayoutMainContainer>
-      <ProSide burgerClicked={burgerClicked} />
+      {
+        !checkIfMobile &&
+        <ProSide burgerClicked={burgerClicked} />
+      }
       <div className={`${burgerClicked ? 'mainContainer1' : 'mainContainer'}`}>
-        <NavBar burgerClicked={burgerClicked} clickBurger={clickBurger} />
+        <NavBar checkIfMobile={checkIfMobile} burgerClicked={burgerClicked} clickBurger={clickBurger} />
+        {
+          checkIfMobile && <NewNavHead />
+        }
         <div className="container">
           <MainRoute {...props} />
         </div>

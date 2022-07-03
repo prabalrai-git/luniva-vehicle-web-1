@@ -8,6 +8,7 @@ import { getCounterwiseTotalCollectionAmtDetailsApi } from "../../../Services/Re
 import { dateFormat } from "../../../Helpers/TodayDate";
 import { AppDefaultSettings } from "../../../Config/AppDefaultSettings";
 import useSingleCompany from "../../../Helpers/SetDefaultCompany";
+import { ExcelExportBtn } from "../../../Components/Common/ExcelExportBtn";
 
 const CounterWiseTotalReport = () => {
     const [dataHead, setDataHead] = useState([])
@@ -28,6 +29,9 @@ const CounterWiseTotalReport = () => {
             })
             setDataHead(data)
             setDataSource(res)
+        } else {
+            setDataHead([])
+            setDataSource([])
         }
     }
 
@@ -51,6 +55,10 @@ const CounterWiseTotalReport = () => {
                     returnFilterData={returnFilterData}
                 />
             </Card>
+            <ExcelExportBtn
+                dataSource={dataSource}
+                filename={'counter wise total collection report.csv'}
+            />
             <div className="tableReponsive">
                 <Table
                     columns={dataHead}

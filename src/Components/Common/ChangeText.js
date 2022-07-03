@@ -1,3 +1,3 @@
 export const nepaliOptions = {
-    layout: "traditional",
+    layout: "romanized",
 };

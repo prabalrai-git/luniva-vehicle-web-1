@@ -90,6 +90,8 @@ const RegisterVehicle = () => {
                     }}>
                     Add New Vehicle
                 </Button>
+                <br />
+                <br />
                 <Filter
                     returnFilterData={returnFilterData}
                     showVehicleList={true}

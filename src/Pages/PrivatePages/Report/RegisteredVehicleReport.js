@@ -8,6 +8,7 @@ import { getDatewiseRegisteredVehicleDetailsApi } from "../../../Services/Report
 import { dateFormat } from "../../../Helpers/TodayDate";
 import useSingleCompany from "../../../Helpers/SetDefaultCompany";
 import { AppDefaultSettings } from "../../../Config/AppDefaultSettings";
+import { ExcelExportBtn } from "../../../Components/Common/ExcelExportBtn";
 
 const RegisteredVehicleReport = () => {
     const [dataHead, setDataHead] = useState([])
@@ -28,6 +29,9 @@ const RegisteredVehicleReport = () => {
             })
             setDataHead(data)
             setDataSource(res)
+        } else {
+            setDataHead([])
+            setDataSource([])
         }
     }
 
@@ -51,6 +55,10 @@ const RegisteredVehicleReport = () => {
                     returnFilterData={returnFilterData}
                 />
             </Card>
+            <ExcelExportBtn
+                dataSource={dataSource}
+                filename={'registered vehicle report.csv'}
+            />
             <div className="tableReponsive">
                 <Table
                     columns={dataHead}

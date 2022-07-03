@@ -17,7 +17,7 @@ export const getDatewiseRegisteredVehicleDetailsApi = async (data, successCallba
     try {
         const response = await fetch(`${GetRegisteredVehicleDetailsBydate}?fromdate=${data.fromdate}&todate=${data.todate}&companyId=${data.companyId}`);
         if (response?.status === 200) {
-            successCallback(response?.data?.GetRoleDetails)
+            successCallback(response?.data?.vehicleDetails)
         } else
             successCallback([])
     } catch (error) {

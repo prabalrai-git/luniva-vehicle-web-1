@@ -106,7 +106,7 @@ export const useNavData = () => {
     const reportNav = [
         {
             id: 11,
-            name: 'Date Collection',
+            name: 'Date wise Collection',
             icon: MdDateRange,
             pathname: '/collectiondetail',
             exact: 'true',
