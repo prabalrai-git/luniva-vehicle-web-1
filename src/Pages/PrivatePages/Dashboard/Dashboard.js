@@ -10,6 +10,7 @@ import { dateFormat } from '../../../Helpers/TodayDate';
 import useToken from '../../../CustomHooks/useToken';
 import { AppDefaultSettings } from '../../../Config/AppDefaultSettings';
 import useSingleCompany from '../../../Helpers/SetDefaultCompany';
+import { backColor } from '../../../Components/Common/ChartBackColor';
 
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title);
 
@@ -22,14 +23,6 @@ const Dashboard = () => {
   const { token } = useToken()
   const appDefSet = AppDefaultSettings.showSingleCompany
   const defaultCompany = useSingleCompany(0, appDefSet)
-  const backColor = [
-    '#aa62b3',
-    '#76c9a5',
-    '#dd5e54',
-    '#8abe6b',
-    '#c4bd43',
-    '#b0ca58',
-  ]
 
   const pieOptions = {
     responsive: true,
@@ -107,7 +100,7 @@ const Dashboard = () => {
     getCounterwiseTotalCollectionAmtDetailsApi(newSendData, (res) => {
       if (res.length > 0) {
         setbarChartLabel(res.map((row) => {
-          return (row.COunter)
+          return (row.Counter)
         }));
 
         setbarChartData(res.map((row) => {

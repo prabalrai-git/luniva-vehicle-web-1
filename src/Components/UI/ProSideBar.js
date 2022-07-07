@@ -8,7 +8,8 @@ import { useNavData } from '../../CustomHooks/navDataHook';
 import { Col, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
 import useCurrentLanguage from '../../CustomHooks/GetCurrentLanguage';
-import logoImg from '../../Assets/Images/luniva360reverse.png'
+// import logoImg from '../../Assets/Images/luniva360reverse.png'
+import logoImg from '../../Assets/Images/logo4.png'
 
 const ProSide = (props) => {
     const { burgerClicked } = props

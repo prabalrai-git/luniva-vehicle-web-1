@@ -10,6 +10,8 @@ import {
 import useToken from '../../CustomHooks/useToken';
 import { useNavigate } from "react-router-dom";
 import { getValidLoginApi } from '../../Services/LoginService';
+import logoImg from '../../Assets/Images/logo3.png'
+import styled from 'styled-components';
 
 const Login = () => {
     const { setToken } = useToken();
@@ -34,64 +36,92 @@ const Login = () => {
     }
 
     return (
-        <Row type='flex' align='center'>
-            <Col>
-                <div className="site-card-border-less-wrapper text-center login_content">
-                    <h2>Login</h2>
-                    <Card bordered={false} className='buttonRadius'>
-                        <Form
-                            name="normal_login"
-                            className="login-form"
-                            initialValues={{
-                                remember: true,
-                            }}
-                            onFinish={onFinish}
-                        >
-                            <Form.Item
-                                name="username"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input your Username!',
-                                    },
-                                ]}
+        <LoginContainer>
+            <Row type='flex' align='center'>
+                {/* style={{background: `url(${logoImg})`}} */}
+                <Col>
+                    <div className="site-card-border-less-wrapper text-center login_content">
+                        <div className='text-center'>
+                            <img src={logoImg} alt="" className='logoImg' />
+                        </div>
+                        <h2>Login</h2>
+                        <Card bordered={false} className='buttonRadius'>
+                            <Form
+                                name="normal_login"
+                                className="login-form"
+                                initialValues={{
+                                    remember: true,
+                                }}
+                                onFinish={onFinish}
                             >
-                                <Input
-                                    placeholder="Username"
-                                    autoFocus={true}
-                                />
-                            </Form.Item>
-                            <Form.Item
-                                name="password"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input your Password!',
-                                    },
-                                ]}
-                            >
-                                <Input
-                                    type="password"
-                                    placeholder="Password"
-                                />
-                            </Form.Item>
-
-                            <Form.Item>
-                                <Button
-                                    type="primary"
-                                    htmlType="submit"
-                                    className="login-form-button"
-                                    block
+                                <Form.Item
+                                    name="username"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Please input your Username!',
+                                        },
+                                    ]}
                                 >
-                                    Log in
-                                </Button>
-                            </Form.Item>
-                        </Form>
-                    </Card>
-                </div>
-            </Col>
-        </Row>
+                                    <Input
+                                        placeholder="Username"
+                                        autoFocus={true}
+                                    />
+                                </Form.Item>
+                                <Form.Item
+                                    name="password"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Please input your Password!',
+                                        },
+                                    ]}
+                                >
+                                    <Input
+                                        type="password"
+                                        placeholder="Password"
+                                    />
+                                </Form.Item>
+
+                                <Form.Item>
+                                    <Button
+                                        type="primary"
+                                        htmlType="submit"
+                                        className="login-form-button"
+                                        block
+                                    >
+                                        Log in
+                                    </Button>
+                                </Form.Item>
+                            </Form>
+                        </Card>
+                    </div>
+                </Col>
+            </Row>
+        </LoginContainer>
     )
 }
 
 export default Login
+
+const LoginContainer = styled.div`
+.ant-row-center {
+    position: relative;
+  }
+  
+  .ant-row-center:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    opacity: 0.1;
+    background: url(${logoImg}) no-repeat center / contain;
+  }
+  
+  .ant-col {
+    position: relative;
+  }
+`

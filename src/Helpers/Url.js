@@ -1,7 +1,7 @@
 /**
  * @desc: api url
  */
-const API_URL = `https://lunivacare.ddns.net/LunivaRouteAPI/`
+const API_URL = `http://lunivacare.ddns.net/LunivaRouteAPI/`
 
 /**
  * @desc: api base url with route
