@@ -112,9 +112,18 @@ export default Login
 const LoginContainer = styled.div`
 .ant-row-center {
     position: relative;
-  }
+}
   
-  .ant-row-center:before {
+.buttonRadius{
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2.2px);
+    -webkit-backdrop-filter: blur(2.2px);
+    border: 1px solid rgba(255, 255, 255, 0.43);
+}
+
+.ant-row-center:before {
     content: ' ';
     display: block;
     position: absolute;
@@ -124,9 +133,9 @@ const LoginContainer = styled.div`
     height: 100vh;
     opacity: 0.1;
     background: url(${logoImg}) no-repeat center / contain;
-  }
+}
   
-  .ant-col {
+.ant-col {
     position: relative;
-  }
+}
 `
