@@ -3,9 +3,20 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { Col, Row } from 'antd'
 import { useNavData } from '../../../CustomHooks/navDataHook'
+import { useTranslation } from 'react-i18next'
+import useCurrentLanguage from '../../../CustomHooks/GetCurrentLanguage'
+import { FaGlobeAsia, FaGlobeEurope } from 'react-icons/fa'
 
 const AppSettings = () => {
   const newNav = useNavData()
+  const { i18n } = useTranslation();
+  const { setLanguage } = useCurrentLanguage();
+
+  function changeLanguage(e) {
+    setLanguage(e.target.value)
+    i18n.changeLanguage(e.target.value);
+  }
+
   return (
     <ReportContainer>
       <h2>App Settings</h2>
@@ -20,6 +31,19 @@ const AppSettings = () => {
             </Col>
           ))
         }
+
+        <Col sm={24} md={8} xs={24} lg={6} key={'changeLanguage'}>
+          {
+            i18n.language === 'en' ?
+              <button className="cButton" onClick={changeLanguage} value='np'>
+                <FaGlobeAsia />&nbsp;नेपाली
+              </button>
+              :
+              <button className='cButton' onClick={changeLanguage} value='en'>
+                <FaGlobeEurope />&nbsp;ENGLISH
+              </button>
+          }
+        </Col>
 
       </Row>
 
@@ -41,9 +65,11 @@ const ReportContainer = styled.div`
     box-shadow: 0 2px 22px 0 rgba( 31, 38, 135, 0.17 );
     backdrop-filter: blur( 4px );
     -webkit-backdrop-filter: blur( 4px );
+    border: none;
     border-radius: 10px;
+    font-size: 16px;
+
     span{
-      font-size: 16px;
       letter-spacing: 1.1px;
       text-transform: uppercase;
       color: var(--titleTxt);
@@ -55,15 +81,16 @@ const ReportContainer = styled.div`
     
     @media(max-width: 768px){
       span{
-      font-size: 16px;
-      letter-spacing: 1.4px;
-      text-transform: uppercase;
-      margin-right: 10px;
-      i{
-        font-size: 25px;
+        font-size: 16px;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+        margin-right: 10px;
+        i{
+          font-size: 25px;
+        }
       }
     }
-    }
+
     @media(max-width: 500px){
       height: 80px;
     }

@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { getValidLoginApi } from '../../Services/LoginService';
 import logoImg from '../../Assets/Images/logo3.png'
 import styled from 'styled-components';
+import { getCompanyDetailsApi } from '../../Services/MiscService';
 
 const Login = () => {
     const { setToken } = useToken();
@@ -19,18 +20,23 @@ const Login = () => {
 
     const onFinish = (values) => {
         getValidLoginApi(values, (res) => {
-            if (res.length !== 0 && res[0].UId > 0) {
-                const newRes = res[0]
-                const tokenData = {
-                    Um: newRes.UId,
-                    Hm: newRes.RoleId,
-                    UserName: newRes.UserName,
+            getCompanyDetailsApi(comRes => {
+                const companyName = comRes.length > 0 ? comRes[0]?.CompanyName : ''
+
+                if (res.length !== 0 && res[0].UId > 0) {
+                    const newRes = res[0]
+                    const tokenData = {
+                        Um: newRes.UId,
+                        Hm: newRes.RoleId,
+                        UserName: newRes.UserName,
+                        CName: companyName
+                    }
+                    setToken(tokenData)
+                    navigate('/admin')
+                } else {
+                    message.error('Username or password is incorrect!')
                 }
-                setToken(tokenData)
-                navigate('/admin')
-            } else {
-                message.error('Username or password is incorrect!')
-            }
+            })
             return
         })
     }
@@ -38,7 +44,6 @@ const Login = () => {
     return (
         <LoginContainer>
             <Row type='flex' align='center'>
-                {/* style={{background: `url(${logoImg})`}} */}
                 <Col>
                     <div className="site-card-border-less-wrapper text-center login_content">
                         <div className='text-center'>

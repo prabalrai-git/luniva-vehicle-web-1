@@ -6,11 +6,9 @@ import { Dropdown, Menu } from 'antd'
 import { Link } from 'react-router-dom'
 import { BiLogOutCircle, BiUserCircle } from 'react-icons/bi'
 import { GiHamburgerMenu } from 'react-icons/gi'
-import { useTranslation } from "react-i18next";
 
 const NavBar = (props) => {
   const { clickBurger, burgerClicked, checkIfMobile } = props
-  const { t } = useTranslation();
   const { token } = useToken()
 
   const menu = (
@@ -56,7 +54,7 @@ const NavBar = (props) => {
             <GiHamburgerMenu className='curPoint' onClick={sideBarCollapse} /> &nbsp;
           </>
         }
-        {t('headername')}
+        {token?.CName}
       </h3>
       <UserIcon className='dropMenuClass'>
         <FaUserCircle />

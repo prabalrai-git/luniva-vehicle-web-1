@@ -14,10 +14,11 @@ function useSingleCompany(returnCompanyId, allData = false, callService = true) 
         if (callService === true) {
             getCompanyDetailsApi(res => {
                 // || !showSingleCom
-                if (isAll)
+                if (isAll){
                     setSingleCompany(res)
-                else
+                } else{
                     setSingleCompany(res[indexId])
+                }
             })
         }
     }
