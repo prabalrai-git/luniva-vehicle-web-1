@@ -46,11 +46,12 @@ const Login = () => {
             <Row type='flex' align='center'>
                 <Col>
                     <div className="site-card-border-less-wrapper text-center login_content">
+                        
+                        <Card bordered={false} className='buttonRadius'>
                         <div className='text-center'>
                             <img src={logoImg} alt="" className='logoImg' />
                         </div>
                         <h2>Login</h2>
-                        <Card bordered={false} className='buttonRadius'>
                             <Form
                                 name="normal_login"
                                 className="login-form"
