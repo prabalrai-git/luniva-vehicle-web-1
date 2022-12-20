@@ -44,11 +44,12 @@ const AddRegisterOwner = (props) => {
     const appDefNep = AppDefaultSettings.removeFromNepali
     const defaultCompany = useSingleCompany(0, appDefSet)
     const allVehicleList = useGetAllVehicleDetails()
-    const {token} = useToken()
+    const { token } = useToken()
     const { i18n } = useTranslation();
 
     useEffect(() => {
         if (forEdit) {
+            // console.log(OId, 'oId');
             setIsButtonLoad(true)
             const prevData = {
                 vId: OId
@@ -73,6 +74,7 @@ const AddRegisterOwner = (props) => {
     }, [serPrevVal, form])
 
     const processStep2Data = (values) => {
+        // console.log(values);
         if (values.OwnerMobileNumber !== undefined && values.OwnerMobileNumber !== '' && isNaN(Number(values.OwnerMobileNumber))) {
             form.setFields([
                 {
@@ -106,11 +108,11 @@ const AddRegisterOwner = (props) => {
             "EntryDate": forEdit ? forEditEntryDate : moment().format(dateFormat),
             "IsActive": values.IsActive === undefined || values.IsActive === true ? true : false,
             "CompanyId": values.CompanyId !== undefined ? values.CompanyId : defaultCompany.CId,
-            "Remarks": values.Remarks !== undefined ? values.Remarks : '',
+            "Remarks": values.Remarks !== undefined ? values.Remarks : 'n/a',
         }
         setVehicleOwnerDetailsApi(newData, (res) => {
             if (res?.SuccessMsg === true) {
-                message.success(res?.Message);
+                message.success(forEdit ? "Owner Details Updated" : "New Owner Added");
                 navigate(`/admin/vehicleowner`)
             } else {
                 message.error('Something went wrong. Please try again')
@@ -125,10 +127,10 @@ const AddRegisterOwner = (props) => {
     }
 
     const onValuesChange = (res) => {
-        if(i18n.language === 'np' && !appDefNep.includes(Object.keys(res)[0]))
-        form.setFieldsValue({
-            [Object.keys(res)[0]]: nepalify.format(Object.values(res)[0], nepaliOptions)
-        })
+        if (i18n.language === 'np' && !appDefNep.includes(Object.keys(res)[0]))
+            form.setFieldsValue({
+                [Object.keys(res)[0]]: nepalify.format(Object.values(res)[0], nepaliOptions)
+            })
     }
 
     return (
@@ -221,6 +223,7 @@ const AddRegisterOwner = (props) => {
                             <Form.Item
                                 name="OwnerName"
                                 label="Owner Name"
+                                onc
                                 rules={[
                                     {
                                         required: true,

@@ -10,7 +10,7 @@ import {
 import useToken from '../../CustomHooks/useToken';
 import { useNavigate } from "react-router-dom";
 import { getValidLoginApi } from '../../Services/LoginService';
-import logoImg from '../../Assets/Images/logo3.png'
+import logoImg from '../../Assets/Images/logo2.png'
 import styled from 'styled-components';
 import { getCompanyDetailsApi } from '../../Services/MiscService';
 
@@ -46,12 +46,12 @@ const Login = () => {
             <Row type='flex' align='center'>
                 <Col>
                     <div className="site-card-border-less-wrapper text-center login_content">
-                        
+
                         <Card bordered={false} className='buttonRadius'>
-                        <div className='text-center'>
-                            <img src={logoImg} alt="" className='logoImg' />
-                        </div>
-                        <h2>Login</h2>
+                            <div className='text-center'>
+                                <img src={logoImg} alt="" className='logoImg' />
+                            </div>
+                            <h2>Login</h2>
                             <Form
                                 name="normal_login"
                                 className="login-form"

@@ -1,20 +1,29 @@
-import { useState } from "react"
-import {
-    Card,
-    Table,
-} from 'antd';
-import Filter from "../../../Components/Common/Filter";
-import { getDatewiseRegisteredVehicleDetailsApi } from "../../../Services/ReportService";
-import { dateFormat } from "../../../Helpers/TodayDate";
-import useSingleCompany from "../../../Helpers/SetDefaultCompany";
-import { AppDefaultSettings } from "../../../Config/AppDefaultSettings";
-import { ExcelExportBtn } from "../../../Components/Common/ExcelExportBtn";
+import { Card, Table } from 'antd'
+import React from 'react'
+import { useEffect } from 'react'
+import { useState } from 'react'
+import { ExcelExportBtn } from '../../../Components/Common/ExcelExportBtn'
+import Filter from '../../../Components/Common/Filter'
+import { AppDefaultSettings } from '../../../Config/AppDefaultSettings'
+import useSingleCompany from '../../../Helpers/SetDefaultCompany'
+import { dateFormat } from '../../../Helpers/TodayDate'
+import { GetRouteAssignedTotalAmountByDateandUserIdApi } from '../../../Services/ReportService'
 
-const RegisteredVehicleReport = () => {
+function TotalAmountByUser() {
+
     const [dataHead, setDataHead] = useState([])
     const [dataSource, setDataSource] = useState([])
     const [filterData, setFilterData] = useState([])
+
+
+
+    useEffect(() => {
+        console.log(filterData, 'filter data');
+
+    }, [filterData])
+
     const appDefSet = AppDefaultSettings.showSingleCompany
+
     const defaultCompany = useSingleCompany(0, appDefSet)
 
     const makeTableData = (res) => {
@@ -36,35 +45,50 @@ const RegisteredVehicleReport = () => {
         }
     }
 
+
     const returnFilterData = (res) => {
+
         setFilterData(res)
         let data = {
             fromdate: res.FromTo[0].format(dateFormat),
             todate: res.FromTo[1].format(dateFormat),
-            companyId: res.CompanyId !== undefined ? res.CompanyId : defaultCompany.CId
+            companyId: res.CompanyId !== undefined ? res.CompanyId : defaultCompany.CId,
+            userId: res.User
+
         }
-        getDatewiseRegisteredVehicleDetailsApi(data, (newRes) => {
+        console.log(data);
+        GetRouteAssignedTotalAmountByDateandUserIdApi(data, (newRes) => {
             makeTableData(newRes)
+            console.log(newRes, 'NewRes');
         })
     }
-    // Title
-    const Title = 'Registered Vehicle Report'
+
+    // Title for page and print variable
+
+    const Title = 'Total Amount By User Report';
+
     return (
+
         <div className="contentContainer">
             <Card title={Title} bordered={false}>
                 <Filter
+
                     showFromToDate={true}
-                    showCompanyList={appDefSet}
+                    showUsers={true}
+                    // showCompanyList={appDefSet}
                     returnFilterData={returnFilterData}
                 />
+
             </Card>
             <ExcelExportBtn
-                dataHead={dataHead}
                 filterData={filterData}
                 Title={Title}
+                dataHead={dataHead}
                 dataSource={dataSource}
-                filename={'registered vehicle report.csv'}
+                filename={'collection report.csv'}
             />
+
+
             <div className="tableReponsive">
                 <Table
                     columns={dataHead}
@@ -75,4 +99,4 @@ const RegisteredVehicleReport = () => {
     )
 }
 
-export default RegisteredVehicleReport
+export default TotalAmountByUser

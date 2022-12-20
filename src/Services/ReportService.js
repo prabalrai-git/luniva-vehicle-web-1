@@ -1,5 +1,5 @@
 import { fetch } from "../Helpers/HttpUtil";
-import { GetCounterWiseTotalCollectionAmt, GetDatewiseCollectionDetails, GetDatewiseCollectionDetailsByCounter, GetRegisteredVehicleDetailsBydate, GetRouteWiseAssignedVehicleCountByDate } from "../Helpers/Url";
+import { GetCounterWiseTotalCollectionAmt, GetDatewiseCollectionDetails, GetDatewiseCollectionDetailsByCounter, GetRegisteredVehicleDetailsBydate, getReservationDetailsByDateForWeb, getRouteAssignedTotalAmountByDateandUserId, GetRouteWiseAssignedVehicleCountByDate } from "../Helpers/Url";
 
 export const getDatewiseCollectionDetailsApi = async (data, successCallback) => {
     try {
@@ -58,5 +58,32 @@ export const getRouteWiseAssignedVehicleCountDetailsApi = async (data, successCa
             successCallback([])
     } catch (error) {
         successCallback([])
+    }
+}
+
+export const GetRouteAssignedTotalAmountByDateandUserIdApi = async (data, successCallback) => {
+    try {
+        const response = await fetch(`${getRouteAssignedTotalAmountByDateandUserId}?fromdate=${data.fromdate}&todate=${data.todate}&companyId=${data.companyId}&userId=${data.userId}`);
+        if (response?.status === 200) {
+            successCallback(response?.data?.UserWiseRouteTotalAmount)
+        } else {
+            successCallback([])
+        }
+    } catch (error) {
+        successCallback([])
+
+    }
+}
+export const GetReservationDetailsByDateApi = async (data, successCallback) => {
+    try {
+        const response = await fetch(`${getReservationDetailsByDateForWeb}?fromdate=${data.fromdate}&todate=${data.todate}`);
+        if (response?.status === 200) {
+            successCallback(response?.data?.GetAllReservationDetailsByDateForWeb)
+        } else {
+            successCallback([])
+        }
+    } catch (error) {
+        successCallback([])
+
     }
 }

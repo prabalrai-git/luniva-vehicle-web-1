@@ -1,6 +1,6 @@
-import { MdDashboard, MdDateRange } from 'react-icons/md'
+import { MdDashboard, MdDateRange, MdAssignment } from 'react-icons/md'
 import { IoDocument } from 'react-icons/io5'
-import { BsGearFill } from 'react-icons/bs'
+import { BsGearFill, BsCashCoin } from 'react-icons/bs'
 import { FaUserAlt, FaBusAlt, FaUserCheck, FaUserFriends, FaUserEdit } from 'react-icons/fa'
 import { TbRoute } from 'react-icons/tb'
 import { GiBusStop } from 'react-icons/gi'
@@ -90,6 +90,13 @@ export const settingsNav = [
         pathname: '/droutedetails',
         exact: 'true',
     },
+    {
+        id: 19,
+        name: 'Cancel Reservation',
+        icon: TbRoute,
+        pathname: '/cancelReservation',
+        exact: 'true',
+    },
 ]
 
 export const reportNav = [
@@ -121,6 +128,20 @@ export const reportNav = [
         pathname: '/countertotaldetail',
         exact: 'true'
     },
+    {
+        id: 15,
+        name: 'Total Amount',
+        icon: BsCashCoin,
+        pathname: '/totalAmount',
+        exact: 'true'
+    },
+    {
+        id: 16,
+        name: 'Reservation Details',
+        icon: MdAssignment,
+        pathname: '/reservationDetails',
+        exact: 'true'
+    }
 ]
 
 export const navData = [

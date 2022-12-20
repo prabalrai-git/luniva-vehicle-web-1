@@ -1,6 +1,6 @@
 {
   "name": "lunivaroutemanagementsystem",
-  "homepage": "http://localhost/lunivaroute/",
+  "homepage": "/lunivaroute",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

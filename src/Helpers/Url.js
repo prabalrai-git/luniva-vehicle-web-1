@@ -1,7 +1,13 @@
 /**
  * @desc: api url
  */
+
+// url for sthaniya yatayat
 const API_URL = `http://lunivacare.ddns.net/LunivaRouteAPI/`
+
+// url for pokhara yatayat
+
+// const API_URL = `http://lunivacare.ddns.net/LunivaRouteAPIUAT/`;
 
 /**
  * @desc: api base url with route
@@ -309,3 +315,22 @@ export const InsertUpdateRole = 'InsertUpdateRole'
  * @param: ?vehicleid={vehicleid}&receiptid={receiptid}&remarks={remarks}
  */
 export const CancelAssignedRouteOfVehicleByAdmin = 'CancelAssignedRouteOfVehicleByAdmin'
+
+export const getRouteAssignedDetailsByDateandUserId = 'GetRouteAssignedDetailsByDateandUserId'
+
+// @desc: GetRouteAssignedDetailsByDateandUserId
+
+export const getRouteAssignedTotalAmountByDateandUserId = 'GetRouteAssignedTotalAmountByDateandUserId'
+
+// @desc: GetRouteAssignedTotalAmountByDateandUserId
+// @param: fromdate={fromdate}&todate={todate}&companyId={companyId}&userId={userId}
+
+
+export const getReservationDetailsByDateForWeb = 'GetAllReservationDetailsByDateForWeb';
+
+// @desc: GetReservationDetailsByDate
+// @param: ?fromdate={fromdate}&todate={todate}
+
+
+
+export const InsertUpdateReserveDetails = 'InsertUpdateReserveDetails';

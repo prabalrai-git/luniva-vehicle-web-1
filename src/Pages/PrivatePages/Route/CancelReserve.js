@@ -1,20 +1,27 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {
     Button,
     Card,
     Table,
     Tag,
 } from 'antd';
-import { getRouteDetailsDateWiseApi } from "../../../Services/RouteService";
 import Filter from "../../../Components/Common/Filter";
 import { dateFormat } from "../../../Helpers/TodayDate";
 import CancelModal from "../../../Components/Common/CancelModal";
+import { GetReservationDetailsByDateApi } from "../../../Services/ReportService";
 
-const DateWiseRouteDetails = () => {
+const CancelReserve = () => {
     const [dataSource, setDataSource] = useState([])
     const [showModal, setShowModal] = useState(false)
     const [sendCancelData, setSendCancelData] = useState([])
+    const [reserveCancelData, setReserveCancelData] = useState([])
     const [currentSelectedDate, setCurrentSelectedDate] = useState('')
+
+
+    // useEffect(() => {
+    //     console.log(reserveCancelData, 'reserveCancelDAta from same page');
+    // }, [reserveCancelData])
+
 
     const columns = [
         {
@@ -23,9 +30,9 @@ const DateWiseRouteDetails = () => {
             key: 'VehicleNumber',
         },
         {
-            title: 'Route Date',
-            dataIndex: 'RouteDate',
-            key: 'RouteDate',
+            title: 'Reservation Date-Time',
+            dataIndex: 'ReservationDate',
+            key: 'ReservationDate',
         },
         {
             title: 'Is Active',
@@ -40,27 +47,29 @@ const DateWiseRouteDetails = () => {
         },
         {
             title: 'Remarks',
-            dataIndex: 'Remarks',
-            key: 'Remarks',
+            dataIndex: 'ReserveRemarks',
+            key: 'ReserveRemarks',
         },
         {
             title: 'Action',
             dataIndex: 'DId',
             key: 'DId',
             render: (text, record) => {
-                console.log(record)
                 return (
                     record?.IsActive === true &&
                     <Button
                         className="buttonRadius"
                         type="danger"
                         onClick={() => {
+                            // console.log(text, 'text', record, 'record');
+                            setReserveCancelData(record)
                             setSendCancelData({
                                 DId: text,
                                 VehicleId: record.VehicleId,
                                 VehicleNumber: record.VehicleNumber
                             })
                             setShowModal(true)
+                            // console.log(record, 'this is the record')
                         }}
                     >
                         Cancel
@@ -72,9 +81,10 @@ const DateWiseRouteDetails = () => {
 
     const getTableData = (selectedDate) => {
         let data = {
-            routeday: selectedDate.SingleDate
+            fromdate: selectedDate.SingleDate,
+            todate: selectedDate.SingleDate
         }
-        getRouteDetailsDateWiseApi(data, (res) => {
+        GetReservationDetailsByDateApi(data, (res) => {
             console.log(res);
             setDataSource(res)
         })
@@ -100,7 +110,7 @@ const DateWiseRouteDetails = () => {
 
     return (
         <div className="contentContainer">
-            <Card title={`Cancel Route`} bordered={false}>
+            <Card title={`Cancel Reservation`} bordered={false}>
                 {/* <Button
                     className="floatRight"
                     type="primary"
@@ -122,13 +132,16 @@ const DateWiseRouteDetails = () => {
                 />
             </div>
             <CancelModal
+                isReservation={true}
                 showModal={showModal}
                 hideModal={hideModal}
+                reserveCancelData={reserveCancelData}
                 sendCancelData={sendCancelData}
                 shouldTableRefresh={shouldTableRefresh}
+
             />
         </div>
     )
 }
 
-export default DateWiseRouteDetails
+export default CancelReserve

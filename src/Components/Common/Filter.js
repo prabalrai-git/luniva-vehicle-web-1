@@ -12,14 +12,17 @@ import { dateFormat } from '../../Helpers/TodayDate';
 import moment from 'moment'
 import useSingleCompany from '../../Helpers/SetDefaultCompany';
 import useGetAllCounterDetails from '../../CustomHooks/GetAllCounterHook';
+import GetAllUsersHook from '../../CustomHooks/GetAllUsersHook';
 
 const Filter = (props) => {
-    const { returnFilterData, showVehicleList, showSingleDatePicker, showCompanyList, showAll, showFromToDate, showCounter } = props
+    const { returnFilterData, showVehicleList, showSingleDatePicker, showCompanyList, showAll, showFromToDate, showCounter, showUsers } = props
     const { Option } = Select
     const [form] = Form.useForm()
     const allVehicleList = useGetAllVehicleDetails(0, showVehicleList)
     const defaultCompany = useSingleCompany(0, showCompanyList)
     const allCounterList = useGetAllCounterDetails(0, showCounter)
+    const allUsers = GetAllUsersHook(0, showUsers)
+    // console.log('aaaaaaa', allUsers);
     const { RangePicker } = DatePicker;
 
     const initialValues = {
@@ -29,6 +32,7 @@ const Filter = (props) => {
     }
 
     const onFilterReturn = (res) => {
+        // console.log(res, 'resmoney');
         returnFilterData(res)
     }
 
@@ -52,8 +56,64 @@ const Filter = (props) => {
                                         label="From - To"
                                     >
                                         <RangePicker
-                                        style={{width: '100%'}}
+                                            style={{ width: '100%' }}
                                         />
+                                    </Form.Item>
+
+                                </Col>
+                            }
+                            {
+                                showUsers &&
+                                <Col lg={6} md={12} sm={12} xs={24}>
+
+                                    <Form.Item
+                                        name="User"
+                                        label="Users"
+                                    >
+                                        <Select
+                                            showSearch
+                                            optionFilterProp="children"
+                                            placeholder="Select Users"
+                                            filterOption={(input, option) => {
+                                                return (
+                                                    option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                                                    option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                                );
+                                            }}
+                                            allowClear
+                                        >
+
+                                            {
+                                                // showAll !== false &&
+                                                <Option
+                                                    title={'All'}
+                                                    key={0}
+                                                    value="0"
+                                                >
+                                                    All
+                                                </Option>
+                                            }
+                                            {
+                                                allUsers && (
+
+                                                    allUsers.map(cList => {
+                                                        // console.log('clist', cList);
+
+                                                        return (
+                                                            // cList?.IsActive === true &&
+                                                            <Option
+                                                                title={cList?.UserFullName}
+                                                                key={cList?.UId}
+                                                                value={cList?.UId}
+                                                            >
+                                                                {cList?.UserFullName}
+                                                            </Option>
+                                                        )
+                                                    }
+                                                    )
+                                                )
+                                            }
+                                        </Select>
                                     </Form.Item>
                                 </Col>
                             }

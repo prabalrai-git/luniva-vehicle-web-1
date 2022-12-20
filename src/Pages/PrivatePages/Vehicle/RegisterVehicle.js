@@ -95,6 +95,7 @@ const RegisterVehicle = () => {
                 <Filter
                     returnFilterData={returnFilterData}
                     showVehicleList={true}
+                    showAll={true}
                 />
             </Card>
             <div className="tableReponsive">

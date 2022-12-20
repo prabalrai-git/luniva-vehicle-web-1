@@ -9,7 +9,7 @@ const Report = () => {
 
   return (
     <ReportContainer>
-    <h2>Report</h2>
+      <h2>Report</h2>
       <Row gutter={[16, 16]}>
         {
           newNav.reportNav.map(e => (

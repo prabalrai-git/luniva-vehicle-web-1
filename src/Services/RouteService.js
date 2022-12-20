@@ -1,6 +1,6 @@
 import { GenerateUrlEncodedData } from "../Helpers/GenerateUrlEncodedData";
 import { fetch, store } from "../Helpers/HttpUtil";
-import { CancelAssignedRouteOfVehicleByAdmin, GetRouteDetailsByCompanyId, GetRouteDetailsByDateWise, GetVehiclewiseRouteDetailsByRouteId, InsertUpdateRouteDetails } from "../Helpers/Url";
+import { CancelAssignedRouteOfVehicleByAdmin, getRouteAssignedDetailsByDateandUserId, GetRouteDetailsByCompanyId, GetRouteDetailsByDateWise, GetVehiclewiseRouteDetailsByRouteId, InsertUpdateReserveDetails, InsertUpdateRouteDetails } from "../Helpers/Url";
 
 export const getRouteDetailsDateWiseApi = async (data, successCallback) => {
     try {
@@ -63,3 +63,27 @@ export const setCancelRouteByAdminApi = async (data, successCallback) => {
         successCallback([])
     }
 }
+
+export const GetRouteAssignedDetailsByDateandUserId = async (data, successCallback) => {
+    try {
+        const response = await fetch(`${getRouteAssignedDetailsByDateandUserId}?fromdate=${data.fromdate}&todate=${data.todate}&companyId=${data.companyId}&userId=${data.userId}`);
+        if (response?.status === 200) {
+            successCallback(response?.data)
+        } else
+            successCallback([])
+    } catch (error) {
+
+    }
+}
+
+export const InsertUpdateReserveDetail = async (data, successCallback) => {
+    try {
+        const formData = GenerateUrlEncodedData(data);
+        const response = await store(InsertUpdateReserveDetails, formData);
+        if (response?.status === 200) {
+            successCallback(response?.data);
+        } else {
+            successCallback([]);
+        }
+    } catch (error) { }
+};

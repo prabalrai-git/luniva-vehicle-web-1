@@ -3,13 +3,16 @@ import { NavLink } from 'react-router-dom'
 import { navData } from '../../Helpers/NavData'
 // import { useTranslation } from 'react-i18next';
 
+
+
+
 const SideBar = () => {
   // const { i18n } = useTranslation();
 
   // function changeLanguage(e) {
   //   i18n.changeLanguage(e.target.value);
   // }
-
+  // console.log(navData, 'navData');
   const handleClick = (e) => {
   }
 

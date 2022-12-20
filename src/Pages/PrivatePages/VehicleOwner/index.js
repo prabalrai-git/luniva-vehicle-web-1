@@ -42,6 +42,7 @@ const VehicleOwner = () => {
             dataIndex: 'OId',
             key: 'OId',
             render: (text, record) => {
+                // console.log("text", text, record);
                 return (
                     <Button
                         className="buttonRadius"
@@ -92,7 +93,7 @@ const VehicleOwner = () => {
                 <Filter
                     returnFilterData={returnFilterData}
                     showVehicleList={true}
-                    showAll={false}
+                    showAll={true}
                 />
             </Card>
             <div className="tableReponsive">

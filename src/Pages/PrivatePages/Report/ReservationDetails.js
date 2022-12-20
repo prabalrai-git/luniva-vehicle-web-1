@@ -1,21 +1,19 @@
-import { useState } from "react"
-import {
-    Card,
-    Table,
-} from 'antd';
-import Filter from "../../../Components/Common/Filter";
-import { getDatewiseRegisteredVehicleDetailsApi } from "../../../Services/ReportService";
-import { dateFormat } from "../../../Helpers/TodayDate";
-import useSingleCompany from "../../../Helpers/SetDefaultCompany";
-import { AppDefaultSettings } from "../../../Config/AppDefaultSettings";
-import { ExcelExportBtn } from "../../../Components/Common/ExcelExportBtn";
+import { Card, Table } from 'antd'
+import React from 'react'
+import { useState } from 'react'
+import { ExcelExportBtn } from '../../../Components/Common/ExcelExportBtn'
+import Filter from '../../../Components/Common/Filter'
+import { dateFormat } from '../../../Helpers/TodayDate'
+import { GetReservationDetailsByDateApi } from '../../../Services/ReportService'
 
-const RegisteredVehicleReport = () => {
+function ReservationDetails() {
+
     const [dataHead, setDataHead] = useState([])
     const [dataSource, setDataSource] = useState([])
     const [filterData, setFilterData] = useState([])
-    const appDefSet = AppDefaultSettings.showSingleCompany
-    const defaultCompany = useSingleCompany(0, appDefSet)
+
+
+
 
     const makeTableData = (res) => {
         if (res.length !== 0) {
@@ -36,35 +34,48 @@ const RegisteredVehicleReport = () => {
         }
     }
 
+
     const returnFilterData = (res) => {
+
         setFilterData(res)
         let data = {
             fromdate: res.FromTo[0].format(dateFormat),
             todate: res.FromTo[1].format(dateFormat),
-            companyId: res.CompanyId !== undefined ? res.CompanyId : defaultCompany.CId
+
+
         }
-        getDatewiseRegisteredVehicleDetailsApi(data, (newRes) => {
+        console.log(data);
+        GetReservationDetailsByDateApi(data, (newRes) => {
             makeTableData(newRes)
+            console.log(newRes, 'Reservation Data');
         })
     }
-    // Title
-    const Title = 'Registered Vehicle Report'
+
+    // Title for page and print variable
+
+    const Title = 'Reservation Details Report';
+
     return (
+
         <div className="contentContainer">
             <Card title={Title} bordered={false}>
                 <Filter
+
                     showFromToDate={true}
-                    showCompanyList={appDefSet}
+                    // showCompanyList={appDefSet}
                     returnFilterData={returnFilterData}
                 />
+
             </Card>
             <ExcelExportBtn
-                dataHead={dataHead}
                 filterData={filterData}
                 Title={Title}
+                dataHead={dataHead}
                 dataSource={dataSource}
-                filename={'registered vehicle report.csv'}
+                filename={'ReservationDetails.csv'}
             />
+
+
             <div className="tableReponsive">
                 <Table
                     columns={dataHead}
@@ -73,6 +84,8 @@ const RegisteredVehicleReport = () => {
             </div>
         </div>
     )
+
+
 }
 
-export default RegisteredVehicleReport
+export default ReservationDetails

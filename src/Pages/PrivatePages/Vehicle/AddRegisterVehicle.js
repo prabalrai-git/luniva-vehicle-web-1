@@ -45,6 +45,9 @@ const AddRegisterVehicle = (props) => {
     const appDefNep = AppDefaultSettings.removeFromNepali
     const { i18n } = useTranslation();
 
+
+
+
     useEffect(() => {
         if (forEdit)
             getVehicleDetails(VId)

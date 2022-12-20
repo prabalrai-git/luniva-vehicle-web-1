@@ -1,6 +1,6 @@
-import { MdDashboard, MdDateRange } from 'react-icons/md'
+import { MdAssignment, MdDashboard, MdDateRange } from 'react-icons/md'
 import { IoDocument } from 'react-icons/io5'
-import { BsGearFill, BsCommand } from 'react-icons/bs'
+import { BsGearFill, BsCommand, BsCashCoin } from 'react-icons/bs'
 import { FaUserAlt, FaBusAlt, FaUserCheck, FaUserFriends, FaUserEdit, FaCarAlt, FaScroll, FaUserTie } from 'react-icons/fa'
 import { TbRoute, TbRouteOff } from 'react-icons/tb'
 import { GiBusStop } from 'react-icons/gi'
@@ -101,6 +101,14 @@ export const useNavData = () => {
             exact: 'true',
             showTab: roleAndRights.showSuperAdminAndAdmin,
         },
+        {
+            id: 20,
+            name: 'Cancel Reservation',
+            icon: TbRouteOff,
+            pathname: '/cancelReservation',
+            exact: 'true',
+            showTab: roleAndRights.showSuperAdminAndAdmin,
+        },
     ]
 
     const reportNav = [
@@ -130,12 +138,29 @@ export const useNavData = () => {
         },
         {
             id: 14,
-            name: 'Counter Total',
+            name: 'Counter Total Amount',
             icon: GiBusStop,
             pathname: '/countertotaldetail',
             exact: 'true',
             showTab: true,
         },
+        {
+            id: 15,
+            name: 'User Total Amount',
+            icon: BsCashCoin,
+            pathname: '/totalAmount',
+            exact: 'true',
+            showTab: true
+        },
+        {
+            id: 16,
+            name: 'Reservation Details',
+            icon: MdAssignment,
+            pathname: '/reservationDetails',
+            exact: 'true',
+            showTab: true
+
+        }
     ]
 
 

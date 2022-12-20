@@ -35,6 +35,9 @@ import Staff from "../Pages/PrivatePages/Staff";
 import AddRole from "../Pages/PrivatePages/Role/AddRole";
 import Role from "../Pages/PrivatePages/Role";
 import { useRoleRights } from "../CustomHooks/GetRoleRightsHook";
+import TotalAmountByUser from "../Pages/PrivatePages/Report/TotalAmountByUser";
+import ReservationDetails from "../Pages/PrivatePages/Report/ReservationDetails";
+import CancelReserve from "../Pages/PrivatePages/Route/CancelReserve";
 
 /**
  * @desc: define static routes here
@@ -77,6 +80,7 @@ const MainRoute = () => {
       <Route exact path='/croutedetails' element={<CompanyWiseRouteDetails />} />
       <Route exact path='/droutedetails' element={<DateWiseRouteDetails />} />
       <Route exact path='/vroutedetails' element={<VehicleWiseRouteDetails />} />
+      <Route exact path='/cancelReservation' element={<CancelReserve />} />
       {/* route details */}
 
       {/* user details */}
@@ -92,6 +96,8 @@ const MainRoute = () => {
       <Route exact path='/reports/vehicledetail' element={<RegisteredVehicleReport />} />
       <Route exact path='/reports/counterdetail' element={<CollectionByCounterReport />} />
       <Route exact path='/reports/countertotaldetail' element={<CounterWiseTotalReport />} />
+      <Route exact path='/reports/totalAmount' element={<TotalAmountByUser />} />
+      <Route exact path='/reports/reservationDetails' element={<ReservationDetails />} />
       {/* report details */}
 
       {

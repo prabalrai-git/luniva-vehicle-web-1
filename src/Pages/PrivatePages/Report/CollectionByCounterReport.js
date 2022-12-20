@@ -13,6 +13,8 @@ import { ExcelExportBtn } from "../../../Components/Common/ExcelExportBtn";
 const CollectionByCounterReport = () => {
     const [dataHead, setDataHead] = useState([])
     const [dataSource, setDataSource] = useState([])
+    const [filterData, setFilterData] = useState([])
+
     const appDefSet = AppDefaultSettings.showSingleCompany
     const defaultCompany = useSingleCompany(0, appDefSet)
 
@@ -36,6 +38,7 @@ const CollectionByCounterReport = () => {
     }
 
     const returnFilterData = (res) => {
+        setFilterData(res)
         let data = {
             fromdate: res.FromTo[0].format(dateFormat),
             todate: res.FromTo[1].format(dateFormat),
@@ -46,10 +49,11 @@ const CollectionByCounterReport = () => {
             makeTableData(newRes)
         })
     }
-
+    // title
+    const Title = 'Collection By Counter Report'
     return (
         <div className="contentContainer">
-            <Card title={`Collection By Counter Report`} bordered={false}>
+            <Card title={Title} bordered={false}>
                 <Filter
                     showFromToDate={true}
                     showCompanyList={appDefSet}
@@ -58,6 +62,9 @@ const CollectionByCounterReport = () => {
                 />
             </Card>
             <ExcelExportBtn
+                filterData={filterData}
+                Title={Title}
+                dataHead={dataHead}
                 dataSource={dataSource}
                 filename={'collection by counter report.csv'}
             />
